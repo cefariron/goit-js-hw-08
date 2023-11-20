@@ -21,8 +21,8 @@ const currentLocalStorageData = JSON.parse(curJsonLocalStorageData);
 document.addEventListener('DOMContentLoaded', getInfo);
 
 function getInfo(event) {
-  inputEl = document.querySelector('input');
-  textareaEl = document.querySelector('textarea');
+  const inputEl = document.querySelector('input');
+  const textareaEl = document.querySelector('textarea');
 
   if (curJsonLocalStorageData) {
     inputEl.value = currentLocalStorageData.email;
