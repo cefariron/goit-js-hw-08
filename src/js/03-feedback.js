@@ -16,7 +16,7 @@ function handleInput(event) {
 }
 
 const curJsonLocalStorageData = localStorage.getItem('feedback-form-state');
-currentLocalStorageData = JSON.parse(curJsonLocalStorageData);
+const currentLocalStorageData = JSON.parse(curJsonLocalStorageData);
 
 document.addEventListener('DOMContentLoaded', getInfo);
 
