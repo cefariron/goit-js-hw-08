@@ -1,12 +1,10 @@
-
 import { galleryItems } from './gallery-items';
 
-import SimpleLightbox from "simplelightbox";
+import SimpleLightbox from 'simplelightbox';
 
-import "simplelightbox/dist/simple-lightbox.min.css";
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
-
-const listEl = document.querySelector(".gallery");
+const listEl = document.querySelector('.gallery');
 
 const markup = galleryItems
   .map(
@@ -16,46 +14,17 @@ const markup = galleryItems
       <img
         class="gallery__image"
         src="${preview}"
-        data-source="${original}"
         alt="${description}"
       />
     </a>
   </li>
 `
   )
-  .join("");
+  .join('');
 
-listEl.insertAdjacentHTML("beforeend", markup);
+listEl.insertAdjacentHTML('beforeend', markup);
 
-listEl.addEventListener("click", (event) => {
-  event.preventDefault();
-
-  if (event.target.nodeName !== "IMG") {
-    return;
-  }
-
-  const instance = basicLightbox.create(
-    `
-    <div class="modal">
-    <img src="${event.target.dataset.source}" width="800" height="600">
-    </div>
-`,
-    {
-      onShow: () => {
-        document.addEventListener("keydown", handleEsc);
-      },
-      onClose: () => {
-        document.removeEventListener("keydown", handleEsc);
-      },
-    }
-  );
-
-  instance.show();
-
-  function handleEsc(event) {
-    if (event.key === "Escape") {
-      instance.close();
-      return;
-    }
-  }
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
 });
