@@ -1,5 +1,9 @@
+// Получил елементы html
 const form = document.querySelector('.feedback-form');
+const inputEl = document.querySelector('[name="email"]');
+const textareaEl = document.querySelector('[name="message"]');
 
+// Записываем в локал стораж
 form.addEventListener('input', handleInput);
 
 function handleInput(event) {
@@ -15,16 +19,14 @@ function handleInput(event) {
   localStorage.setItem('feedback-form-state', JSON.stringify(currentInfo));
 }
 
-const curJsonLocalStorageData = localStorage.getItem('feedback-form-state');
-const currentLocalStorageData = JSON.parse(curJsonLocalStorageData);
-
 document.addEventListener('DOMContentLoaded', getInfo);
 
-function getInfo(event) {
-  const inputEl = document.querySelector('input');
-  const textareaEl = document.querySelector('textarea');
+function getInfo() {
+  const currentLocalStorageData = JSON.parse(
+    localStorage.getItem('feedback-form-state')
+  );
 
-  if (curJsonLocalStorageData) {
+  if (currentLocalStorageData) {
     inputEl.value = currentLocalStorageData.email;
     textareaEl.value = currentLocalStorageData.message;
   }
@@ -34,7 +36,13 @@ form.addEventListener('submit', handleSubmit);
 
 function handleSubmit(event) {
   event.preventDefault();
-  console.log(currentLocalStorageData);
-  form.reset();
-  localStorage.clear();
+
+  if (inputEl.value || textareaEl.value) {
+    let consoleObj = JSON.parse(localStorage.getItem('feedback-form-state'));
+    console.log(consoleObj);
+    localStorage.removeItem('feedback-form-state');
+    form.reset();
+  } else {
+    return;
+  }
 }
