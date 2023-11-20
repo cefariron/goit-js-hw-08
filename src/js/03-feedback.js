@@ -1,9 +1,8 @@
-// Получил елементы html
 const form = document.querySelector('.feedback-form');
 const inputEl = document.querySelector('[name="email"]');
 const textareaEl = document.querySelector('[name="message"]');
 
-// Записываем в локал стораж
+
 form.addEventListener('input', handleInput);
 
 function handleInput(event) {
@@ -19,6 +18,7 @@ function handleInput(event) {
   localStorage.setItem('feedback-form-state', JSON.stringify(currentInfo));
 }
 
+
 document.addEventListener('DOMContentLoaded', getInfo);
 
 function getInfo() {
@@ -31,6 +31,7 @@ function getInfo() {
     textareaEl.value = currentLocalStorageData.message;
   }
 }
+
 
 form.addEventListener('submit', handleSubmit);
 
