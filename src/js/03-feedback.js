@@ -4,19 +4,15 @@ const form = document.querySelector('.feedback-form');
 const inputEl = document.querySelector('[name="email"]');
 const textareaEl = document.querySelector('[name="message"]');
 
-const throttledHandleInput = throttle(handleInput, 500);
 
-
-form.addEventListener('input', throttledHandleInput);
+form.addEventListener('input', throttle(handleInput, 500));
 
 function handleInput(event) {
   event.preventDefault();
 
-  const { email, message } = event.currentTarget.elements;
-
-  const currentInfo = {
-    email: email.value,
-    message: message.value,
+  let currentInfo = {
+    email: inputEl.value,
+    message: textareaEl.value,
   };
 
   localStorage.setItem('feedback-form-state', JSON.stringify(currentInfo));
